@@ -17,8 +17,10 @@
                             <p class="m-0 text-secondary" style="font-size: 14px;"><?= $data['email'] ?></p>
                         </div>
                     </div>
+                    <div class="d-flex justify-content-center">
+                        <img src="assets/img/posts/<?= $data['image']?>" class="rounded-3 mt-5" alt="">
+                    </div>
 
-        <img src="assets/img/posts/<?= $data['image']?>" class="rounded-3 mt-5" alt="">
     </div>
 </header>
 
