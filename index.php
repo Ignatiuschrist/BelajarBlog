@@ -1,4 +1,8 @@
-    <?php include('components/header.php') ?>
+    <?php 
+    $title = 'Homepage';
+    include('components/header.php'); 
+    $last_post = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM posts INNER JOIN  users ON posts.user_id=users.id ORDER BY posts.id DESC LIMIT 1"));
+    ?>
     <header class="py-5">
         <div class="container">
             <h1 class="header-title text-primary text-center text-capitalize">Discover nice articles here</h1>
@@ -25,26 +29,23 @@
 
     <section class="py-5">
         <div class="container">
-            <a href="#" class="row align-items-center hero-post">
+            <a href="detail.php?title=<?= $last_post['slug'] ?>" class="row align-items-center hero-post">
                 <div class="col-md-6">
-                    <img src="assets/img/post-1.jpg" alt="" class="rounded-3 mb-3 hero-post-img">
+                    <img src="assets/img/posts/<?= $last_post['image'] ?>" alt="" class="rounded-3 mb-3 hero-post-img">
                 </div>
                 <div class="col-md-6">
                     <span class="bg-light rounded p-2 fw-bold text-primary category">The Newest</span>
                     <h2 class="hero-post-title text-primary text-capitalize mt-3">
-                        I Hear It Likes the Girls
+                        <?= $last_post['title'] ?>
                     </h2>
                     <p class="text-secondary">
-                        When I was little, I loved when the Ghostbusters theme came on the radio. I used to yell, “I
-                        aint afraid of no ghost!” along with it. Of course, as I got older, I understood the irony of
-                        that statement. Ray Parker, Jr. is mocking that sentiment, not supporting it. By implication, he
-                        is asking, “Are you sure?”
+                        <?= (str_word_count($last_post['body']) > 60 ? substr($last_post['body'], 0, 200) . "......" :$last_post['body']) ?>
                     </p>
                     <div class="d-flex align-items-center gap-3">
-                        <img src="assets/img/avatar.jpg" class="avatar rounded-circle" alt="">
+                        <img src="assets/img/user/<?= $last_post['photo'] ?>" class="avatar rounded-circle" alt="">
                         <div class="profile">
-                            <p class="m-0 text-primary">Ignatius Christabel</p>
-                            <p class="m-0 text-secondary" style="font-size: 14px;">Web Developer</p>
+                            <p class="m-0 text-primary"><?= $last_post['name'] ?></p>
+                            <p class="m-0 text-secondary" style="font-size: 14px;"><?= $last_post['email'] ?></p>
                         </div>
                     </div>
                 </div>
@@ -55,75 +56,34 @@
     <section class="py-5">
         <div class="container">
             <div class="row">
+                <?php
+                $query = mysqli_query($connect, "SELECT * FROM posts INNER JOIN  users ON posts.user_id=users.id ORDER BY posts.id DESC");
+                while($data = mysqli_fetch_array($query)) {
+                ?>
+                
                 <div class="col-md-4">
-                    <a href="#" class="card card-post border-0 rounded-3 mb-3">
-                        <img src="assets/img/post-1.jpg" alt="" class="card-img-top">
+                    <a href="detail.php?title=<?= $data['slug'] ?>" class="card card-post border-0 rounded-3 mb-3">
+                        <img src="assets/img/posts/<?= $data['image'] ?>" alt="" class="card-img-top">
 
                         <div class="card-body">
                         <span class="bg-light rounded p-2 fw-bold text-primary category">The Newest</span>
                     <h2 class="card-post-title text-primary text-capitalize mt-3">
-                        I Hear It Likes the Girls
+                    <?= $data['title'] ?>
                     </h2>
                     <p class="text-secondary">
-                        When I was little, I loved when the Ghostbusters theme came on the radio. I used to yell, “I
-                        aint afraid of no ghost!” along with it. Of course, as I got older.
+                    <?= (str_word_count($data['body']) > 60 ? substr($data['body'], 0, 200) . "......" :$data['body']) ?>
                     </p>
                     <div class="d-flex align-items-center gap-3">
-                        <img src="assets/img/avatar.jpg" class="avatar rounded-circle" alt="">
+                        <img src="assets/img/user/<?= $data['photo'] ?>" class="avatar rounded-circle" alt="">
                         <div class="profile">
-                            <p class="m-0 text-primary">Ignatius Christabel</p>
-                            <p class="m-0 text-secondary" style="font-size: 14px;">Web Developer</p>
+                            <p class="m-0 text-primary"><?= $data['name'] ?></p>
+                            <p class="m-0 text-secondary" style="font-size: 14px;"><?= $data['email'] ?></p>
                         </div>
                     </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="#" class="card card-post border-0 rounded-3 mb-3">
-                        <img src="assets/img/post-1.jpg" alt="" class="card-img-top">
-
-                        <div class="card-body">
-                        <span class="bg-light rounded p-2 fw-bold text-primary category">The Newest</span>
-                    <h2 class="card-post-title text-primary text-capitalize mt-3">
-                        I Hear It Likes the Girls
-                    </h2>
-                    <p class="text-secondary">
-                        When I was little, I loved when the Ghostbusters theme came on the radio. I used to yell, “I
-                        aint afraid of no ghost!” along with it. Of course, as I got older.
-                    </p>
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="assets/img/avatar.jpg" class="avatar rounded-circle" alt="">
-                        <div class="profile">
-                            <p class="m-0 text-primary">Ignatius Christabel</p>
-                            <p class="m-0 text-secondary" style="font-size: 14px;">Web Developer</p>
-                        </div>
                     </div>
-                        </div>
                     </a>
                 </div>
-                <div class="col-md-4">
-                    <a href="#" class="card card-post border-0 rounded-3 mb-3">
-                        <img src="assets/img/post-1.jpg" alt="" class="card-img-top">
-
-                        <div class="card-body">
-                        <span class="bg-light rounded p-2 fw-bold text-primary category">The Newest</span>
-                    <h2 class="card-post-title text-primary text-capitalize mt-3">
-                        I Hear It Likes the Girls
-                    </h2>
-                    <p class="text-secondary">
-                        When I was little, I loved when the Ghostbusters theme came on the radio. I used to yell, “I
-                        aint afraid of no ghost!” along with it. Of course, as I got older.
-                    </p>
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="assets/img/avatar.jpg" class="avatar rounded-circle" alt="">
-                        <div class="profile">
-                            <p class="m-0 text-primary">Ignatius Christabel</p>
-                            <p class="m-0 text-secondary" style="font-size: 14px;">Web Developer</p>
-                        </div>
-                    </div>
-                        </div>
-                    </a>
-                </div>
+                <?php }?>
             </div>
         </div>
     </section>

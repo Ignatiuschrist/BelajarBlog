@@ -10,18 +10,18 @@ include('components/header.php');
             <a href="posts.php" class="btn btn-light">Go Dashboard</a>
         </div>
 
-        <form action="#" method="post">
+        <form action="php/profile.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-12">
                     <div class="mb-3">
                         <label for="name">Your Name</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Enter Your Name">
+                        <input type="text" name="name" id="name" class="form-control" value="<?= $user_logged ['name'] ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="email">Your Email</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Enter Your Email">
+                        <input type="email" name="email" id="email" class="form-control" value="<?= $user_logged ['email'] ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -39,7 +39,7 @@ include('components/header.php');
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary px-4">Submit</button>
+            <button type="submit" class="btn btn-primary px-4" name="action">Submit</button>
         </form>
     </div>
 </section>

@@ -1,3 +1,10 @@
+<?php 
+include('config/connect.php');
+if (isset($_SESSION['user_id'])) {
+    $user_logged = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM users WHERE id = '$_SESSION[user_id]'"));
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,15 +27,26 @@
 
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav gap-3 mx-auto">
-                    <li class="nav-item"><a href="" class="nav-link active">Home</a></li>
-                    <li class="nav-item"><a href="" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="." class="nav-link <?= ($title == 'Homepage') ? 'active text-primary' : '' ?>">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link <?= ($title == 'Detail') ? 'active text-primary' : '' ?>">Blog</a></li>
                     <li class="nav-item"><a href="" class="nav-link">Service</a></li>
                     <li class="nav-item"><a href="" class="nav-link">About Us</a></li>
                 </ul>
                 <ul class="navbar-nav gap-3">
-                    <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
-                    <li class="nav-item"><a href="register.php"
-                            class="btn btn-primary rounded-pill fw-medium px-4 py-2">Register</a></li>
+                    <?php
+                    if (!isset($_SESSION['user_id'])) {
+                    ?>
+                        <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
+                        <li class="nav-item"><a href="register.php" class="btn btn-primary rounded-pill fw-medium px-4 py-2">Register</a></li>
+                        <?php
+                        } else {
+                        ?>
+                            <li class="nav-item">
+                        <a href="blogger/" class="nav-link active">Hi, <?= $user_logged['name']?></a></li>
+                        <li class="nav-item"><a href="php/logout.php" class="nav-link">Logout</a></li>
+                        <?php
+                        }
+                    ?>
                 </ul>
             </div>
         </div>

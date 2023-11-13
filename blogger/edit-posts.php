@@ -2,6 +2,8 @@
 if (!isset($_GET['post_id'])) {
     header('location: posts.php');
 }
+
+$title = 'Edit Post';
 include('components/header.php');
 $data = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM posts WHERE id='$_GET[post_id]' "));
 ?>

@@ -32,7 +32,7 @@ $user_logged = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM users WH
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav gap-3 me-auto">
                     <li class="nav-item"><a href="." class="nav-link <?= ($title == 'Dashboard') ? 'active text-primary' : '' ?>">Dashboard</a></li>
-                    <li class="nav-item"><a href="posts.php" class="nav-link <?= ($title == 'Post') ? 'active text-primary' : '' ?>">Post</a></li>
+                    <li class="nav-item"><a href="posts.php" class="nav-link <?= ($title == 'Post' || $title == 'Edit Post') ? 'active text-primary' : '' ?>">Post</a></li>
                     <li class="nav-item"><a href="create-post.php" class="nav-link <?= ($title == 'Create Post') ? 'active text-primary' : '' ?>">Create Post</a></li>
                     <li class="nav-item"><a href="profile.php" class="nav-link <?= ($title == 'Profile') ? 'active text-primary' : '' ?>">Profile</a></li>
                     <!-- <li class="nav-item"><a href="posts.php" class="nav-link">Post</a></li>
