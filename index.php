@@ -42,7 +42,7 @@
                         <?= (str_word_count($last_post['body']) > 60 ? substr($last_post['body'], 0, 200) . "......" :$last_post['body']) ?>
                     </p>
                     <div class="d-flex align-items-center gap-3">
-                        <img src="assets/img/user/<?= $last_post['photo'] ?>" class="avatar rounded-circle" alt="">
+                        <img src="assets/img/user/<?= (!$last_post['photo']) ? 'avatar.jpg' : $last_post['photo'] ?>" class="avatar rounded-circle" alt="">
                         <div class="profile">
                             <p class="m-0 text-primary"><?= $last_post['name'] ?></p>
                             <p class="m-0 text-secondary" style="font-size: 14px;"><?= $last_post['email'] ?></p>
@@ -74,7 +74,7 @@
                     <?= (str_word_count($data['body']) > 60 ? substr($data['body'], 0, 200) . "......" :$data['body']) ?>
                     </p>
                     <div class="d-flex align-items-center gap-3">
-                        <img src="assets/img/user/<?= $data['photo'] ?>" class="avatar rounded-circle" alt="">
+                        <img src="assets/img/user/<?= (!$data['photo']) ? 'avatar.jpg' : $data['photo'] ?>" class="avatar rounded-circle" alt="">
                         <div class="profile">
                             <p class="m-0 text-primary"><?= $data['name'] ?></p>
                             <p class="m-0 text-secondary" style="font-size: 14px;"><?= $data['email'] ?></p>
